@@ -1,9 +1,9 @@
 function error() {
-	$("pre").css("color", "red");
+	$("#display").css("color", "red");
 }
 $(function() {
 
-	$("form").bind("keyup keypress pageload", function(e) {
+	$("#twig-form").bind("keyup keypress pageload", function(e) {
 		var variables = $("#variables").val() || "{}";
 		var template = $("#template").val();
 		if (!window.isFirst) {
@@ -32,13 +32,13 @@ $(function() {
 			'variables': variables
 		},
 		function(d) {
-			$("pre").html(d).css("color", "black");
+			$("#display").html(d).css("color", "black");
 			if ("sessionStorage" in window) {
 				sessionStorage.setItem("variables", variables);
 				sessionStorage.setItem("template", template);
 			}
 			$("#permalink").attr("href", function() {
-				return "/?" + $("form").serialize();
+				return "/?" + $("#twig-form").serialize();
 			});
 			if ("replaceState" in window.history) {
 				history.replaceState({},
@@ -61,7 +61,7 @@ $(function() {
 				}
 			}
 		}
-		$("form").trigger("pageload");
+		$("#twig-form").trigger("pageload");
 	});
 
 });

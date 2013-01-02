@@ -26,7 +26,7 @@ var variables = <?php echo json_encode($_GET["variables"]); ?>;
 <body>
 <h2>Twig Playground</h2>
 </script>
-<form>
+<form id="twig-form">
 <label for="variables">Variables JSON</label>
 
 <textarea id="variables" name="variables"></textarea>
@@ -34,7 +34,7 @@ var variables = <?php echo json_encode($_GET["variables"]); ?>;
 <label for="template">Template</label>
 <textarea id="template" name="template"></textarea>
 </form>
-<pre>
+<pre id="display">
 
 
 </pre>
