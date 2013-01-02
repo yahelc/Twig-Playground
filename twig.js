@@ -1,5 +1,18 @@
-function error() {
+function error(causeOfError) {
 	$("#display").css("color", "red");
+	if (causeOfError) {
+		$("#" + causeOfError).closest(".control-group").addClass("error");
+	}
+}
+
+
+function success(d) {
+	if (d && d === "json") {
+		$("#variables").closest(".control-group").removeClass("error");
+		return;
+	}
+	$("#display").html(d).css("color", "black");
+	$(".control-group").removeClass("error");
 }
 $(function() {
 
@@ -17,13 +30,14 @@ $(function() {
 				JSON.parse(variables);
 			}
 			catch(eee) {
-				error();
+				error("variables");
 				return true;
 			}
+			success("json");
 		}
 		if (e.target.id == "template") {
 			if (template.split("{").length !== template.split("}").length) {
-				error();
+				error("template");
 				return true;
 			}
 		}
@@ -32,7 +46,7 @@ $(function() {
 			'variables': variables
 		},
 		function(d) {
-			$("#display").html(d).css("color", "black");
+			success();
 			if ("sessionStorage" in window) {
 				sessionStorage.setItem("variables", variables);
 				sessionStorage.setItem("template", template);
