@@ -6,6 +6,7 @@ function error(causeOfError) {
 }
 
 
+
 function success(d) {
 	if (d && d === "json") {
 		$("#variables").closest(".control-group").removeClass("error");
