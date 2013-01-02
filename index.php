@@ -14,7 +14,9 @@
   width: 640px;
   height: 160px;
 }
-
+body{
+  margin:1em;
+}
 </style>
 <script>
 var template = <?php echo json_encode($_GET["template"]); ?>;
