@@ -16,11 +16,15 @@
 }
 
 </style>
+<script>
+var template = <?php echo json_encode($_GET["template"]); ?>;
+var variables = <?php echo json_encode($_GET["variables"]); ?>;
+</script>
+<script src="twig.js">
 
 </head>
 <body>
 <h2>Twig Playground</h2>
-<script src="twig.js">
 </script>
 <form>
 <label for="variables">Variables JSON</label>

@@ -45,8 +45,6 @@ $("form").bind("keyup keypress pageload", function(e){
 });
 
 $(function(){
- var template = <?php echo json_encode($_GET["template"]); ?>;
- var variables = <?php echo json_encode($_GET["variables"]); ?>;
  if(template && variables){
 	$("#template").val(template);
 	$("#variables").val(variables);
