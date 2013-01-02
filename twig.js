@@ -12,7 +12,7 @@ function success(d) {
 		$("#variables").closest(".control-group").removeClass("error");
 		return;
 	}
-	$("#display").html(d).css("color", "black");
+	$("#display").css("color", "black");
 	$(".control-group").removeClass("error");
 }
 $(function() {
@@ -48,6 +48,7 @@ $(function() {
 		},
 		function(d) {
 			success();
+			$("#display").html(d);
 			if ("sessionStorage" in window) {
 				sessionStorage.setItem("variables", variables);
 				sessionStorage.setItem("template", template);
