@@ -14,7 +14,7 @@
   width: 640px;
   height: 160px;
 }
-}
+
 </style>
 
 </head>
