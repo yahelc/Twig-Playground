@@ -19,8 +19,16 @@ body{
 }
 </style>
 <script>
-var template = <?php echo json_encode($_GET["template"]); ?>;
-var variables = <?php echo json_encode($_GET["variables"]); ?>;
+var get = (function() {
+	var map = {};
+	window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, k, v) {
+		map[k] = decodeURIComponent(v);
+	});
+	return map;
+} ());
+
+var template = get.template;
+var variables = get.variables; 
 </script>
 <script src="twig.js"></script>
 </head>
