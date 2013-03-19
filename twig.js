@@ -5,10 +5,10 @@ function error(causeOfError) {
 	}
 }
 
-
+var supportsSessionStorage = "sessionStorage" in window; 
 
 function success(d) {
-	if (d && d === "json") {
+	if (d === "json") {
 		$("#variables").closest(".control-group").removeClass("error");
 		return;
 	}
@@ -29,9 +29,12 @@ var variables = get.variables;
 
 $(function() {
 
+	var $template  = $("#template"),
+		$variables = $("#variables");
+
 	$("#twig-form").bind("keyup keypress pageload", function(e) {
 		var variables = $("#variables").val() || "{}";
-		var template = $("#template").val();
+		var template = $template.val();
 		if (!window.isFirst) {
 			window.isFirst = true;
 			if (variables === sessionStorage.variables && template === sessionStorage.template) {
@@ -61,7 +64,7 @@ $(function() {
 		function(d) {
 			success();
 			$("#display").html(d);
-			if ("sessionStorage" in window) {
+			if (supportsSessionStorage) {
 				sessionStorage.setItem("variables", variables);
 				sessionStorage.setItem("template", template);
 			}
@@ -75,21 +78,13 @@ $(function() {
 		}).error(error);
 
 	});
-
-	$(function() {
-		if (template && variables) {
-			$("#template").val(template);
-			$("#variables").val(variables);
-		} else {
-			if ("sessionStorage" in window) {
-				for (var key in sessionStorage) {
-					if (sessionStorage.hasOwnProperty(key)) {
-						$("#" + key).val(sessionStorage[key]);
-					}
-				}
-			}
-		}
-		$("#twig-form").trigger("pageload");
-	});
+	if (template && variables) {
+		$template.val(template);
+		$variables.val(variables);
+	} else if (supportsSessionStorage) {
+		$template.val(sessionStorage.getItem("template"));
+		$variables.val(sessionStorage.getItem("variables"));
+	}
+	$("#twig-form").trigger("pageload");
 
 });
