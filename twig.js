@@ -19,7 +19,7 @@ function success(d) {
 var get = (function() {
 	var map = {};
 	window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, k, v) {
-		map[k] = decodeURIComponent(v);
+		map[k] = decodeURIComponent(v.replace(/\+/g," "));
 	});
 	return map;
 } ());
