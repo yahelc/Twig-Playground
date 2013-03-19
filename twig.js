@@ -15,6 +15,18 @@ function success(d) {
 	$("#display").css("color", "black");
 	$(".control-group").removeClass("error");
 }
+
+var get = (function() {
+	var map = {};
+	window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, k, v) {
+		map[k] = decodeURIComponent(v);
+	});
+	return map;
+} ());
+
+var template = get.template;
+var variables = get.variables; 
+
 $(function() {
 
 	$("#twig-form").bind("keyup keypress pageload", function(e) {
